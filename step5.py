@@ -34,6 +34,7 @@ url = "http://challenge.code2040.org/api/dating"
 response = requests.post(url=url, data=data)
 dictionary = response.json()
 
+#grabbing datestamp and interval from the dictionary
 datestamp = dictionary.get("datestamp")
 interval = dictionary.get("interval")
 
