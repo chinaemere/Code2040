@@ -22,6 +22,7 @@
 
 
 import requests
+import json
 
 token = "dc12b6952158de030df0dea0a4d4b765"
 data = {
@@ -31,20 +32,15 @@ url = "http://challenge.code2040.org/api/prefix"
 response = requests.post(url=url, data=data)
 dictionary = response.json()
 
-prefix = dictionary.get("prefix")
+#Grabbing the words array and prefix from the dictionary
 array = dictionary.get("array")
+prefix = dictionary.get("prefix")
 
-#Array for the array without prefixes
-returnArray = []
+#A for loop that grabs words that do not start with the prefix and adds them to the array
+result = [word for word in array if not word.startswith(prefix)]
 
-for word in array:
-    if not word.startswith(prefix):
-        returnArray.append(str(word))
-    
-data["array"] = returnArray
+data['array'] = result
 
-
-#POSTing the solution to the endpoint
-
+#The data has converted into json format
 url = "http://challenge.code2040.org/api/prefix/validate"
-requests.post(url=url, data=data)
+response = requests.post(url=url, json=data)
