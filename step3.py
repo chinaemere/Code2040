@@ -33,7 +33,7 @@ dictionary = response.json()
 needle = dictionary.get("needle")
 haystack = dictionary.get("haystack")
 
-
+#a for loop to find where needle is in the haystack and equate it to the index
 for i in range(len(haystack)):
     if needle == haystack[i]:
         index = i
@@ -43,4 +43,3 @@ for i in range(len(haystack)):
 data["needle"] = index
 url = "http://challenge.code2040.org/api/haystack/validate"
 requests.post(url=url, data=data)
-
